@@ -1,0 +1,22 @@
+service: api
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+functions:
+  all-mangas:
+    handler: api/all-mangas.handler
+    layers:
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:1
+    events:
+      - http:
+          path: all-mangas/
+          method: get
+  all-chapters:
+    handler: api/all-chapters.handler
+    layers:
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:1
+    events:
+      - http:
+          path: all-chapters/{mangaid}
+          method: get

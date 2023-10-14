@@ -1,0 +1,10 @@
+service: layers
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+
+layers:
+  sequelize:
+    path: sequelize
