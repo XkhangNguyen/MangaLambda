@@ -8,3 +8,5 @@ provider:
 layers:
   sequelize:
     path: sequelize
+  services:
+    path: services

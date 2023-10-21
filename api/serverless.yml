@@ -3,20 +3,41 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: ap-southeast-1
+  vpc:
+    securityGroupIds:
+      - sg-0a5d1b30672574547
+    subnetIds:
+      - subnet-0809a5a18bcf408a1
+      - subnet-0138e3a3b95aa681b
+      - subnet-031371ed519fe6b21
 functions:
   all-mangas:
-    handler: api/all-mangas.handler
+    handler: all-mangas.handler
+    role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
     layers:
-      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:1
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
     events:
       - http:
           path: all-mangas/
           method: get
-  all-chapters:
-    handler: api/all-chapters.handler
+  chapters-of-manga:
+    handler: chapters-of-manga.handler
+    role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
     layers:
-      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:1
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
     events:
       - http:
-          path: all-chapters/{mangaid}
+          path: chapters/{mangaid}
+          method: get
+  chapter-images:
+    handler: chapter-images.handler
+    role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
+    layers:
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
+    events:
+      - http:
+          path: images/{chapterid}
           method: get
