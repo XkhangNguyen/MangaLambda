@@ -16,7 +16,7 @@ functions:
     role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
     layers:
       - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
-      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:22
     events:
       - http:
           path: all-mangas/
@@ -26,7 +26,7 @@ functions:
     role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
     layers:
       - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
-      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:22
     events:
       - http:
           path: chapters/{mangaid}
@@ -36,7 +36,7 @@ functions:
     role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
     layers:
       - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
-      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:18
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:22
     events:
       - http:
           path: images/{chapterid}

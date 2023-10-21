@@ -45,20 +45,15 @@ class MangaService {
         try {
             // Find the chapter record by its ID
             const chapterRecord = await this.models.chapter.findByPk(chapterId, {
-                include: 'chapter_images'
+                include: 'chapter_image'
             });
 
             if (!chapterRecord) {
                 throw new Error('Chapter not found');
             }
 
-            // Access the associated chapter_images
-            const chapterImages = chapterRecord.chapter_images;
+            return chapterRecord.chapter_image;
 
-            // Extract image URLs from the chapter_images
-            const imageUrls = chapterImages.map((image) => image.chapter_image_url);
-
-            return imageUrls;
         } catch (error) {
             console.error('Error getting chapter image URLs:', error.message);
             throw error;
