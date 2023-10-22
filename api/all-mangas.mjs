@@ -2,14 +2,28 @@
 
 import sequelize from '/opt/models/dbConfig.mjs';
 
-import MangaService from '/opt/services/mangaServices.mjs';
-
 import handleErrorServices from '/opt/services/handleErrorServices.mjs';
 
+const mangaService = {
+  models: sequelize.models,
+
+  async getAllManga() {
+    return await this.models.manga.findAll({
+      include: [
+        {
+          model: this.models.genre,
+          attributes: ['genre_name'],
+          through: {
+            attributes: []
+          },
+        }
+      ]
+    });
+  },
+};
 
 export const handler = async (event) => {
   try {
-    const mangaService = new MangaService(sequelize);
 
     const mangaRecords = await mangaService.getAllManga();
 

@@ -2,17 +2,36 @@
 
 import sequelize from '/opt/models/dbConfig.mjs';
 
-import MangaService from '/opt/services/mangaServices.mjs';
-
 import handleErrorServices from '/opt/services/handleErrorServices.mjs';
+
+const mangaService = {
+    models: sequelize.models,
+
+    async getChapterImageURLsOfChapter(chapterId) {
+        try {
+            // Find the chapter record by its ID
+            const chapterRecord = await this.models.chapter.findByPk(chapterId, {
+                include: 'chapter_image'
+            });
+
+            if (!chapterRecord) {
+                throw new Error('Chapter not found');
+            }
+
+            return chapterRecord.chapter_image;
+
+        } catch (error) {
+            console.error('Error getting chapter image URLs:', error.message);
+            throw error;
+        }
+    }
+}
 
 
 export const handler = async (event) => {
     const chapterId = event.pathParameters.chapterid;
 
     try {
-        const mangaService = new MangaService(sequelize);
-
         const chapterImages = await mangaService.getChapterImageURLsOfChapter(chapterId);
 
         const response = JSON.stringify(chapterImages);
