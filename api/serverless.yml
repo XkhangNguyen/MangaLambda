@@ -51,3 +51,13 @@ functions:
       - http:
           path: all-mangas/genre/{genreid}
           method: get
+  all-genres:
+    handler: all-genres.handler
+    role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
+    layers:
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:26
+    events:
+      - http:
+          path: genres
+          method: get
