@@ -1,3 +1,0 @@
-check the credentials
-make sure in the right region
-after making changes, deploy to lambda using "serverless deploy"

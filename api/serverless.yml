@@ -61,3 +61,13 @@ functions:
       - http:
           path: genres
           method: get
+  search-mangas:
+    handler: search-mangas.handler
+    role: arn:aws:iam::213496112887:role/LambdaPrivateRDSRole
+    layers:
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:sequelize:3
+      - arn:aws:lambda:ap-southeast-1:213496112887:layer:services:26
+    events:
+      - http:
+          path: search-mangas/
+          method: get
